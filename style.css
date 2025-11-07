@@ -1,0 +1,13 @@
+
+body{background:#0f1724;color:#e6eef8;font-family:Inter,Arial,sans-serif;margin:0}
+.container{max-width:1100px;margin:auto;padding:20px}
+header{display:flex;align-items:center;gap:15px}
+.brand{font-size:22px;font-weight:700}
+nav{margin-left:auto}
+nav a{color:#ccc;text-decoration:none;margin:0 8px}
+.btn{background:linear-gradient(90deg,#00c853,#00bcd4);border:none;border-radius:8px;padding:8px 14px;color:#042022;font-weight:600;cursor:pointer}
+.secondary{background:transparent;border:1px solid #444;color:#ccc}
+.card{background:#0b1220;padding:16px;border-radius:12px;margin:10px 0}
+.images img{width:100%;border-radius:10px}
+.calc input{width:100%;padding:6px;border-radius:6px;margin:4px 0;background:#111;color:#eee;border:1px solid #333}
+footer{margin-top:20px;text-align:center;font-size:14px;color:#aaa}
