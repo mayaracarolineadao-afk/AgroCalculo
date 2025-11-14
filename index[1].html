@@ -1,0 +1,146 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AgroCálculo — AgroCalc Moderno</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=200&auto=format&fit=crop" alt="logo" class="logo"/>
+        <div class="brand-text"><strong>AgroCálculo</strong><span>Calcário para Cana-de-Açúcar</span></div>
+      </div>
+      <nav class="main-nav">
+        <a href="#calc">Cálculo</a>
+        <a href="#galeria">Fotos</a>
+        <a href="#compra">Comprar</a>
+        <button id="openAdminBtn" class="btn ghost">Admin</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Calcule a necessidade de calcário para sua lavoura</h1>
+        <p class="lead">Ferramenta didática para apresentação no curso de Produção Vegetal. Fórmula tradicional ou editável via painel admin.</p>
+        <a href="#calc" class="btn">Abrir calculadora</a>
+      </div>
+      <div class="hero-gallery">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=900&auto=format&fit=crop" alt="cana" />
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=900&auto=format&fit=crop" alt="calcario" />
+      </div>
+    </section>
+
+    <section id="calc" class="card calc-card">
+      <h2>Calculadora de Calagem (Fórmula editável)</h2>
+      <p class="muted">Fórmula atual (editável no painel admin): <code id="formulaText">NC (t/ha) = (V₂ - V₁) × T / PRNT</code></p>
+
+      <div class="grid">
+        <div class="col">
+          <label>V₁ — Saturação por bases atual (%)</label>
+          <input type="number" id="v1" value="45" step="0.1" />
+          <label>V₂ — Saturação por bases desejada (%)</label>
+          <input type="number" id="v2" value="70" step="0.1" />
+          <label>T — CTC a pH 7 (cmolc/dm³)</label>
+          <input type="number" id="tval" value="15" step="0.01" />
+        </div>
+        <div class="col">
+          <label>PRNT — Poder relativo de neutralização total (%)</label>
+          <input type="number" id="prnt" value="90" step="0.1" />
+          <label>Área (ha)</label>
+          <input type="number" id="area" value="1" step="0.01" />
+          <label>Observações</label>
+          <input type="text" id="obs" placeholder="Ex: camada 0-20 cm" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="calcBtn" class="btn">Calcular</button>
+        <button id="resetBtn" class="btn ghost">Reset</button>
+      </div>
+
+      <div id="output" class="result" style="display:none">
+        <div class="result-line"><strong>Necessidade (t/ha):</strong> <span id="ncText"></span></div>
+        <div class="result-line"><strong>Kg por hectare:</strong> <span id="kgText"></span></div>
+        <div class="result-line muted small" id="explain"></div>
+        <div class="result-line small muted" id="obsOut"></div>
+      </div>
+    </section>
+
+    <section id="galeria" class="card gallery-card">
+      <h2>Galeria do Agronegócio</h2>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop" alt="agro1" />
+        <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=1200&auto=format&fit=crop" alt="agro2" />
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="cana" />
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" alt="calcario" />
+      </div>
+    </section>
+
+    <section id="compra" class="card compra-card">
+      <h2>Comprar Calcário (link fictício)</h2>
+      <p>Este link é apenas para demonstração — não realiza pagamento.</p>
+      <div class="compra-actions">
+        <a class="btn" href="#" id="fakeBuy1">Comprar Calcário 20 kg — R$ 120,00</a>
+        <a class="btn ghost" href="#" id="fakeBuy2">Comprar Calcário 1 t — R$ 4.800,00</a>
+      </div>
+    </section>
+
+    <section class="card about-card" id="sobre">
+      <h3>Sobre</h3>
+      <p class="muted">Ferramenta criada para apresentação no curso de Produção Vegetal. Use o painel admin para editar a fórmula, imagens e textos. Todas as alterações são salvas localmente no navegador (localStorage).</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>AgroCálculo — Apresentação</div>
+      <div>Desenvolvido por Mayara Caroline Adão e Rafael Neves</div>
+    </div>
+  </footer>
+
+  <!-- Admin modal -->
+  <div id="adminModal" class="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h4>Painel Admin</h4>
+        <button id="closeAdmin" class="btn ghost">Fechar</button>
+      </div>
+
+      <div id="loginPanel" class="admin-section">
+        <label>Senha</label>
+        <input type="password" id="adminPass" placeholder="Senha administrativa" />
+        <div class="small muted">Senha temporária: <strong>admin123</strong></div>
+        <button id="loginBtn" class="btn">Entrar</button>
+      </div>
+
+      <div id="adminPanel" style="display:none">
+        <h5>Editar conteúdo</h5>
+        <label>Título do site</label>
+        <input id="siteTitle" type="text" value="AgroCálculo" />
+        <label>Fórmula (texto)</label>
+        <input id="formulaInput" type="text" value="NC (t/ha) = (V₂ - V₁) × T / PRNT" />
+        <label>Imagem de destaque 1 (URL)</label>
+        <input id="img1" type="text" />
+        <label>Imagem de destaque 2 (URL)</label>
+        <input id="img2" type="text" />
+        <label>PRNT padrão (%)</label>
+        <input id="prntDefault" type="number" value="90" />
+        <div class="admin-actions">
+          <button id="saveAdmin" class="btn">Salvar</button>
+          <button id="logoutBtn" class="btn ghost">Sair</button>
+        </div>
+        <div class="small muted">As alterações ficam salvas no navegador (localStorage).</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
